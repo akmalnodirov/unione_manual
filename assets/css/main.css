@@ -6,7 +6,7 @@ body {
   background-color: white;
   color: black;
   scroll-behavior: smooth !important; 
-  transition: all 1s !important; 
+  transition: all 3s !important; 
 }
 
 

@@ -9,13 +9,13 @@
       <img src="../assets/imgs/noroot.png" alt="Logo" />
    </div>
    <ul class="flex gap-8">
-      <li class="navbar-li"><a href="#home"">Home</a></li>
-      <li class="navbar-li"><a href="#features">Features</a></li>
-      <li class="navbar-li"><a href="#about">About</a></li>
-      <li class="navbar-li"><a href="#services">Services</a></li>
-      <li class="navbar-li"><a href="#support">Support</a></li>
-      <li class="navbar-li"><a href="#contact">Contacts</a></li>
-      <li class="navbar-li"><a href="#" >+1(321)999-7776</a></li>
+      <li class="navbar-li"><a href="#home" @click.prevent="scrollToSection('home')">Home</a></li>
+      <li class="navbar-li"><a href="#features" @click.prevent="scrollToSection('features')">Features</a></li>
+      <li class="navbar-li"><a href="#about" @click.prevent="scrollToSection('about')">About</a></li>
+      <li class="navbar-li"><a href="#services" @click.prevent="scrollToSection('services')">Services</a></li>
+      <li class="navbar-li"><a href="#support" @click.prevent="scrollToSection('support')">Support</a></li>
+      <li class="navbar-li"><a href="#contact" @click.prevent="scrollToSection('contact')">Contacts</a></li>
+      <li class="navbar-li"><a href="tel:+13219997776">+1(321)999-7776</a></li>
    </ul>
 </div>
 
@@ -36,13 +36,13 @@
     <img src="../assets/imgs/noroot.png" alt="Logo" />
   </div>
   <ul class="flex flex-col items-center gap-4">
-    <li class="navbar-li"><a href="#">Home</a></li>
-    <li class="navbar-li"><a href="#">Features</a></li>
-    <li class="navbar-li"><a href="#">About</a></li>
-    <li class="navbar-li"><a href="#">Services</a></li>
-    <li class="navbar-li"><a href="#">Support</a></li>
-    <li class="navbar-li"><a href="#">Contacts</a></li>
-    <li class="navbar-li"><a href="#">+1(321)999-7776</a></li>
+    <li class="navbar-li"><a href="#" @click.prevent="scrollToSection('home')" >Home</a></li>
+    <li class="navbar-li"><a href="#" @click.prevent="scrollToSection('features')" >Features</a></li>
+    <li class="navbar-li"><a href="#" @click.prevent="scrollToSection('about')" >About</a></li>
+    <li class="navbar-li"><a href="#" @click.prevent="scrollToSection('services')" >Services</a></li>
+    <li class="navbar-li"><a href="#" @click.prevent="scrollToSection('support')" >Support</a></li>
+    <li class="navbar-li"><a @click.prevent="scrollToSection('contact')" >Contacts</a></li>
+    <li class="navbar-li"><a href="tel:+13219997776">+1(321)999-7776</a></li>
   </ul>
   </div>
 </div>
@@ -58,6 +58,20 @@ function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
 
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const headerOffset = 120;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+    isMenuOpen.value = false;
+  }
+}
 </script>
 
 <style scoped>
@@ -68,9 +82,15 @@ function toggleMenu() {
   font-weight: 700;
   cursor: pointer;
   transition: color 0.2s;
+  text-decoration: none;
 }
 
 .navbar-li a:hover {
   color: black;
+}
+
+#home, #features, #about, #services, #support, #contact {
+  padding-top: 150px;
+  margin-top: -150px;
 }
 </style>

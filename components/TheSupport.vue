@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-gradient-to-b from-[rgba(39,40,41,0.5)] to-[rgba(209,209,202,0.3)]"
+    class="h-auto min-h-[70vh] flex flex-col justify-center bg-gradient-to-b from-[rgba(39,40,41,0.5)] to-[rgba(209,209,202,0.3)]"
   >
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-12">
       <div class="text-center mb-12">
         <h1 class="text-3xl font-bold mb-2">SUPPORT</h1>
         <div class="w-16 h-1 bg-red-600 mx-auto"></div>
@@ -11,42 +11,44 @@
 
       <div class="flex justify-center gap-3 mb-8">
         <UButton
-  v-for="button in buttons"
-  :key="button.id"
-  :class="[
-    'transition-all duration-300 rounded-full',
-    activeButtons[button.id]
-      ? 'bg-[#44444D] text-white'
-      : 'bg-gray-600 text-white hover:bg-gray-700',
-    'px-4 py-1 text-xs', // Default styling
-    'sm:px-6 sm:py-2 sm:text-sm', // Small screens
-    'md:px-8 md:py-2 md:text-base', // Medium screens
-    'lg:px-14 lg:py-3 lg:text-lg', // Large screens
-  ]"
-  @click="toggleSection(button.id)"
->
-  {{ button.text }}
-</UButton>
+          v-for="button in buttons"
+          :key="button.id"
+          :class="[
+            'transition-all duration-300 rounded-full',
+            activeButton === button.id
+              ? 'bg-[#44444D] text-white'
+              : 'bg-gray-600 text-white hover:bg-gray-700',
+            'px-4 py-1 text-xs',
+            'sm:px-6 sm:py-2 sm:text-sm',
+            'md:px-8 md:py-2 md:text-base',
+            'lg:px-14 lg:py-3 lg:text-lg',
+          ]"
+          @click="handleButtonClick(button.id)"
+        >
+          {{ button.text }}
+        </UButton>
       </div>
 
       <div class="space-y-12">
-        <TransitionGroup name="cards" tag="div">
+        <TransitionGroup name="sections" tag="div" class="relative">
+          <!-- Manuals Section -->
           <div
-            v-if="activeButtons.manuals"
+            v-if="activeButton === 'manuals'"
             :key="'manuals'"
-            ref="manualsRef"
-            class="w-full h-[90vh]"
+            class="w-full"
           >
             <div class="w-full max-w-xl mx-auto mb-8">
               <h1
                 class="text-3xl max-md:text-2xl font-bold mb-4 text-center text-custom-color"
               >
-                GInstruction Manuals
+                Instruction Manuals
               </h1>
               <div class="w-48 h-1 bg-red-900 mx-auto"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+            >
               <div
                 v-for="card in manualCards"
                 :key="card.id"
@@ -63,45 +65,35 @@
             </div>
           </div>
 
-          <div
-            v-if="activeButtons.videos"
-            :key="'videos'"
-            ref="videosRef"
-            class="w-full h-[80vh]"
-          >
+          <!-- Videos Section -->
+          <div v-if="activeButton === 'videos'" :key="'videos'" class="w-full">
             <div class="w-full m-auto flex justify-center my-6">
-              <h2 class="text-3xl">
+              <h2 class="text-3xl max-md:text-xl max-lg:text-2xl font-semibold text-center">
                 Most popular videos about trucking industry
               </h2>
             </div>
             <div
-              class="w-[80%] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              class="w-[80%] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
             >
               <div
                 v-for="video in videoCards"
                 :key="video.id"
-                class="bg-gray-100 rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105"
+                class="max-w-[384px] w-full h-64 flex flex-col justify-between items-center shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105"
               >
                 <iframe
-                  class="w-full aspect-video"
+                  class="w-full h-full aspect-video"
                   :src="video.src"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                 ></iframe>
-                <div class="p-4">
-                  <h3 class="font-semibold text-lg">{{ video.title }}</h3>
-                </div>
+                <h3 class="font-semibold text-lg">{{ video.title }}</h3>
               </div>
             </div>
           </div>
 
-          <div
-            v-if="activeButtons.other"
-            :key="'other'"
-            ref="otherRef"
-            class="w-full h-[90vh]"
-          >
+          <!-- FAQ Section -->
+          <div v-if="activeButton === 'other'" :key="'other'" class="w-full">
             <div class="w-full max-w-xl mx-auto mb-8">
               <h1
                 class="text-3xl max-md:text-2xl font-bold mb-4 text-center text-custom-color"
@@ -110,13 +102,13 @@
               </h1>
               <div class="w-full h-1 bg-red-900 mx-auto"></div>
             </div>
-            <div class="max-w-4xl mx-auto p-6 space-y-4">
+            <div class="max-w-4xl mx-auto p-6 space-y-4 mb-12">
               <div>
                 <h2 class="text-xl text-red-800 font-medium">
                   Is your ELD FMCSA certified?
                 </h2>
                 <p class="text-sm font-light">
-                  In compliance with the FMCSA’s ELD Mandate, our ELD Compliance
+                  In compliance with the FMCSA's ELD Mandate, our ELD Compliance
                   Solution was registered and certified by the FMCSA.
                 </p>
               </div>
@@ -125,7 +117,7 @@
                   Do I have to print my logs during an inspection?
                 </h2>
                 <p class="text-sm font-light">
-                  With our ELD, you’re not required to present physical logs.
+                  With our ELD, you're not required to present physical logs.
                   Our ELD is able to transfer data electronically, but screen
                   displays can also be presented if need be. However, an
                   enforcement officer may request that additional information be
@@ -165,39 +157,11 @@
                   should be paired
                 </p>
               </div>
-              <div>
-                <h2 class="text-xl text-red-800 font-medium">
-                  How can drivers create driver vehicle inspection reports
-                  (DVIRs)?
-                </h2>
-                <p class="text-sm font-light">
-                  Drivers can use the World Trucking ELD Electronic Logbook App
-                  to create DVIRs. The DVIRs created in the app can be accessed
-                  by fleet managers by viewing the World Trucking ELD Portal
-                  (Dashboard).
-                </p>
-              </div>
-              <div>
-                <h2 class="text-xl text-red-800 font-medium">
-                  How is driving time recorded?
-                </h2>
-                <p class="text-sm font-light">
-                  A driver’s driving time will be automatically recorded as long
-                  as the driver connects their mobile device to the ELD via
-                  Bluetooth and the vehicle is registered in the World Trucking
-                  ELD App. A vehicle is considered to be in motion if it is
-                  traveling over 5 mph.
-                </p>
-              </div>
             </div>
           </div>
 
-          <div
-            v-if="activeButtons.faq"
-            :key="'faq'"
-            ref="faqRef"
-            class="w-full h-[90vh]"
-          >
+          <!-- Other Section -->
+          <div v-if="activeButton === 'faq'" :key="'faq'" class="w-full">
             <div class="w-full max-w-xl mx-auto mb-8 font">
               <h1
                 class="text-3xl max-md:text-xl font-bold mb-4 text-center text-custom-color"
@@ -206,21 +170,20 @@
               </h1>
               <div class="w-32 h-1 bg-red-900 mx-auto"></div>
             </div>
-            <div class="max-w-3xl mx-auto p-6">
+            <div class="max-w-3xl mx-auto p-6 mb-12">
               <UAccordion
                 :items="items"
                 :ui="{ wrapper: 'flex flex-col w-full' }"
               >
-                <template #default="{ item, index, open }">
+                <template #default="{ item, open }">
                   <UButton
                     variant="ghost"
                     class="border my-2 bg-[#44444D] border-gray-200 dark:border-gray-700"
                     :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
                   >
-                    <span class="truncate text-white p-4"
-                      >{{ index + 1 }}. {{ item.label }}</span
-                    >
-
+                    <span class="truncate text-white p-4">{{
+                      item.label
+                    }}</span>
                     <template #trailing>
                       <UIcon
                         name="i-heroicons-chevron-right-20-solid"
@@ -240,14 +203,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 
-const activeButtons = ref({
-  manuals: false,
-  videos: false,
-  faq: false,
-  other: false,
-});
+const activeButton = ref(null);
 
 const buttons = [
   { id: "manuals", text: "MANUALS" },
@@ -294,137 +252,77 @@ const manualCards = [
 const videoCards = [
   {
     id: 1,
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/CP1LyV6n5TA?si=G2WMHtlxs-2qK1f9",
     title: "Getting Started with ELD",
   },
   {
     id: 2,
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/GOSimU3hTKg?si=XbDuSYmBPjH53VY3",
     title: "ELD Installation Guide",
   },
   {
     id: 3,
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/GOSimU3hTKg?si=XbDuSYmBPjH53VY3",
     title: "Troubleshooting Common Issues",
-  },
-];
-
-const faqs = ref([
-  {
-    question: "How do I install the ELD device?",
-    answer:
-      "Installation is simple: plug the device into your vehicle's diagnostic port, download our app, and follow the in-app setup instructions.",
-    isOpen: false,
-  },
-  {
-    question: "What should I do if my device isn't connecting?",
-    answer:
-      "First, ensure the device is properly plugged in. If issues persist, try restarting your vehicle and the app. Contact support if problems continue.",
-    isOpen: false,
-  },
-  {
-    question: "How often does the device need maintenance?",
-    answer:
-      "Our ELD devices are designed for minimal maintenance. We recommend checking connections monthly and updating the software when prompted.",
-    isOpen: false,
-  },
-]);
-
-const otherResources = [
-  {
-    id: 1,
-    title: "Training Materials",
-    description:
-      "Access our comprehensive training materials for drivers and fleet managers.",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Compliance Guidelines",
-    description:
-      "Stay up to date with the latest ELD compliance requirements and regulations.",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Support Contact",
-    description: "24/7 support available through phone, email, or live chat.",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Software Updates",
-    description: "Download the latest software updates and patch notes.",
-    link: "#",
   },
 ];
 
 const items = [
   {
-    label: "Where is ROUTE ELD's officelocated?",
+    label: "Where is ROUTE ELD's office located?",
     defaultOpen: true,
     content: "1612 Prosser",
   },
   {
     label: "Installation",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
   },
   {
     label: "Theming",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
   },
   {
     label: "Layouts",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
   },
   {
     label: "Components",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
-  },
-  {
-    label: "Utilities",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
   },
 ];
 
-const toggleSection = (buttonId) => {
-  activeButtons.value[buttonId] = !activeButtons.value[buttonId];
+const handleButtonClick = (buttonId) => {
+  if (activeButton.value === buttonId) {
+    activeButton.value = null;
+  } else {
+    activeButton.value = buttonId;
+  }
 };
 </script>
 
 <style scoped>
-.cards-enter-active,
-.cards-leave-active {
+.sections-enter-active,
+.sections-leave-active {
   transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
 }
 
-.cards-enter-from {
+.sections-enter-from {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.cards-leave-to {
+.sections-leave-to {
   opacity: 0;
   transform: translateY(-30px);
 }
 
-.cards-move {
+.sections-move {
   transition: transform 0.5s ease;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
 }
 </style>

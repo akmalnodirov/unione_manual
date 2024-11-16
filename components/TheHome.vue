@@ -6,12 +6,12 @@
       alt="truck"
     />
 
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-80"></div>
 
     <div
       class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4"
     >
-      <h1 class="w-[50%] text-2xl md:text-4xl lg:text-5xl max-md:w-[90%] font-bold">
+      <h1 class="w-[50%] text-2xl md:text-4xl lg:text-6xl max-md:w-[90%] font-bold leading-6" style="letter-spacing: 2px;" >
         We help you navigate your complex business environment
       </h1>
     </div>
@@ -45,7 +45,10 @@ import { ref } from "vue";
 const targetSection = ref(null);
 
 const scrollToSection = () => {
-  targetSection.value.scrollIntoView({ behavior: "smooth" });
+  const nextSection = document.getElementById('features');
+  if (nextSection) {
+    nextSection.scrollIntoView({ behavior: "smooth" });
+  }
 };
 </script>
 
