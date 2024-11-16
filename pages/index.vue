@@ -6,7 +6,10 @@
     <TheServices  id="services"/>
     <TheSupport id="support" />
     <TheContacts id="contact"/>
-    <TheFormModal v-if="showModal" />
+    <TheFormModal 
+    v-if="showModal" 
+    @close="closeModal"
+  />
     <footer>
       <div class="w-full h-[7vh] flex justify-center items-center" style="background-color: rgba(39, 40, 41, 0.9)">
          <p class=" text-sm" style="color: rgb(255, 255, 255, 0.5);" >© 2023 All Right Reserved. Route Eld Service.</p>
@@ -26,8 +29,15 @@ onMounted(() => {
   if (!isModalShown) {
     setTimeout(() => {
       showModal.value = true
-    }, 4000) // 4 soniyadan keyin modalni ko‘rsatish
+      // Modalni ko'rsatgandan so'ng localStorage'ga belgi qo'yamiz
+      localStorage.setItem('modal-shown', 'true')
+    }, 4000)
   }
 })
+
+// Modalni yopish uchun metod
+const closeModal = () => {
+  showModal.value = false
+}
 </script>
 <style scoped></style>

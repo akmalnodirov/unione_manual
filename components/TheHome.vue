@@ -6,7 +6,7 @@
       alt="truck"
     />
 
-    <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-70"></div>
 
     <div
       class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4"
