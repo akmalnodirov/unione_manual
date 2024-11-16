@@ -8,7 +8,7 @@
     <TheContacts id="contact"/>
     <TheFormModal 
     v-if="showModal" 
-    @close="closeModal"
+    v-modal = "showModal"
   />
     <footer>
       <div class="w-full h-[7vh] flex justify-center items-center" style="background-color: rgba(39, 40, 41, 0.9)">
@@ -29,13 +29,10 @@ onMounted(() => {
   if (!isModalShown) {
     setTimeout(() => {
       showModal.value = true
-      // Modalni ko'rsatgandan so'ng localStorage'ga belgi qo'yamiz
-      localStorage.setItem('modal-shown', 'true')
     }, 4000)
   }
 })
 
-// Modalni yopish uchun metod
 const closeModal = () => {
   showModal.value = false
 }

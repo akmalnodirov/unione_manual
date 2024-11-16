@@ -16,9 +16,7 @@
       </div>
     </div>
 
-    <!-- Plans Section -->
     <div class="flex flex-wrap justify-center gap-6 lg:gap-12 mt-12">
-      <!-- Plan Cards -->
       <div
         v-for="(plan, index) in plans"
         :key="plan.title"
@@ -30,7 +28,6 @@
           'background-color': 'rgba(209, 209, 202)'
         }"
       >
-        <!-- Plan Header -->
         <div class="w-full bg-[#44444D] flex flex-col justify-center items-center pb-8 pt-6 rounded-t-sm">
           <h2 class="text-white text-2xl lg:text-3xl" style="font-family: Georgia;">
             {{ plan.title }}
@@ -39,7 +36,6 @@
           <p class="text-white text-lg lg:text-xl">{{ plan.billingCycle }}</p>
         </div>
 
-        <!-- Plan Features List -->
         <div class="flex flex-col justify-between h-full">
           <ul class="mt-4 w-full p-4 space-y-3 flex-col text-base sm:text-lg font-semibold">
             <li 
@@ -54,7 +50,6 @@
             </li>
           </ul>
 
-          <!-- Access Button -->
           <button 
             class="m-5 bg-[#44444D] py-3 px-10 sm:px-16 text-white font-bold rounded-3xl button-animation"
             :class="{ 'fade-in': isVisible }"
@@ -74,7 +69,6 @@ import { ref, onMounted } from 'vue';
 const isVisible = ref(false);
 const hasAnimated = ref(false);
 
-// Define the plans array with titles, billing cycles, and features for each plan
 const plans = [
   {
     title: "Economy",
@@ -111,7 +105,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Previous styles */
 li {
   display: flex;
   gap: 8px;
@@ -125,7 +118,6 @@ button:hover {
   background-color: rgb(102, 18, 18);
 }
 
-/* Animation classes */
 .fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }

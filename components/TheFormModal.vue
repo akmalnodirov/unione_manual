@@ -1,18 +1,16 @@
 <template>
   <div v-if="modelValue" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
     <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-2xl relative animate-fade-in">
-      <!-- Modal close button -->
       <button 
-        @click="$emit('update:modelValue', false)"
-        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-      >
+      @click="$emit('update:modelValue', false)"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+    >
         <span class="sr-only">Yopish</span>
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <!-- Logo -->
       <div class="flex justify-center mb-6">
         <img 
           src="../assets/imgs/image.png" 
@@ -21,7 +19,6 @@
         />
       </div>
 
-      <!-- Title -->
       <div class="text-center mb-8">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">
           Get Free Access
@@ -29,9 +26,7 @@
         <p class="text-gray-500">Start your journey with Route ELD</p>
       </div>
 
-      <!-- Form -->
       <form @submit.prevent="handleSubmit" class="space-y-6">
-        <!-- Email Input -->
         <div>
           <div class="relative">
             <input
@@ -56,7 +51,6 @@
           <p v-if="errors.email" class="mt-2 text-sm text-red-500">{{ errors.email }}</p>
         </div>
 
-        <!-- Name Input -->
         <div>
           <input
             type="text"
@@ -67,7 +61,6 @@
           />
         </div>
 
-        <!-- Phone Input -->
         <div>
           <input
             type="tel"
@@ -78,7 +71,6 @@
           />
         </div>
 
-        <!-- Submit Button -->
         <button
           type="submit"
           :disabled="isSubmitting || Object.keys(errors).length > 0"
@@ -95,7 +87,6 @@
         </button>
       </form>
 
-      <!-- Footer Text -->
       <p class="text-center text-gray-500 mt-6 text-sm">
         By signing up, you agree to our 
         <a href="#" class="text-blue-600 hover:underline">Terms</a> and 
@@ -148,14 +139,11 @@ const handleSubmit = async () => {
   isSubmitting.value = true
 
   try {
-    // API call simulation
     await new Promise(resolve => setTimeout(resolve, 2000))
     
-    // Success handling
     localStorage.setItem('modal-shown', 'true')
     emit('update:modelValue', false)
     
-    // Reset form
     form.value = {
       email: '',
       name: '',

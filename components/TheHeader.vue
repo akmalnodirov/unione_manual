@@ -1,9 +1,7 @@
 <template>
   <header class="top-0 left-0 w-full z-10 shadow-sm" style="background-color: rgb(209, 209, 202);">
-    <!-- Desktop Navigation -->
    <div class="hidden lg:block h-[120px]"></div>
 
-<!-- Fixed Navbar -->
 <div class="hidden lg:flex flex-col fixed top-0 left-0 w-full  items-center z-50 shadow-md h-[120px]" style="background-color: rgb(209, 209, 202);">
    <div class="flex justify-center items-center w-[400px]">
       <img src="../assets/imgs/noroot.png" alt="Logo" />
@@ -19,14 +17,12 @@
    </ul>
 </div>
 
-    <!-- Mobile Menu Button -->
     <div class="w-full flex lg:hidden justify-end items-center p-4  bg-black">
       <button @click="toggleMenu" class="text-xl font-bold text-white">
         &#9776;
       </button>
     </div>
 
-    <!-- Mobile Menu -->
 <div v-if="isMenuOpen" class="w-full ">
   <div class="w-full flex justify-end lg:hidden absolute top-1 right-2  p-1 bg-black">
   <button @click="toggleMenu" class="text-4xl ml-1 font-bold text-white">&times;</button>

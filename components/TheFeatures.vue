@@ -36,10 +36,10 @@ onMounted(() => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !hasAnimated.value) {
         isVisible.value = true;
-        hasAnimated.value = true; // Animatsiya faqat bir marta ishlashi uchun
+        hasAnimated.value = true; 
       }
     });
-  }, { threshold: 0.3 }); // Element 30% ko'ringanda animatsiya boshlanadi
+  }, { threshold: 0.3 }); 
 
   const section = document.querySelector('.features-section');
   if (section) {
@@ -162,7 +162,6 @@ onMounted(() => {
   animation: slideInRight 0.8s ease-out forwards;
 }
 
-/* Animation keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;

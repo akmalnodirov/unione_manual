@@ -31,7 +31,6 @@
 
       <div class="space-y-12">
         <TransitionGroup name="sections" tag="div" class="relative">
-          <!-- Manuals Section -->
           <div
             v-if="activeButton === 'manuals'"
             :key="'manuals'"
@@ -65,7 +64,6 @@
             </div>
           </div>
 
-          <!-- Videos Section -->
           <div v-if="activeButton === 'videos'" :key="'videos'" class="w-full">
             <div class="w-full m-auto flex justify-center my-6">
               <h2 class="text-3xl max-md:text-xl max-lg:text-2xl font-semibold text-center">
@@ -92,7 +90,6 @@
             </div>
           </div>
 
-          <!-- FAQ Section -->
           <div v-if="activeButton === 'other'" :key="'other'" class="w-full">
             <div class="w-full max-w-xl mx-auto mb-8">
               <h1
@@ -157,10 +154,26 @@
                   should be paired
                 </p>
               </div>
+              <div>
+                <h2 class="text-xl text-red-800 font-medium">
+                  How can drivers create driver vehicle inspection reports (DVIRs)?
+                </h2>
+                <p class="text-sm font-light">
+                  Drivers can use the World Trucking ELD Electronic Logbook App to create DVIRs. The DVIRs created in the app can be accessed by fleet managers by viewing the World Trucking ELD Portal (Dashboard).
+
+                </p>
+              </div>
+              <div>
+                <h2 class="text-xl text-red-800 font-medium">
+                  How is driving time recorded?
+                </h2>
+                <p class="text-sm font-light">
+                  A driver’s driving time will be automatically recorded as long as the driver connects their mobile device to the ELD via Bluetooth and the vehicle is registered in the World Trucking ELD App. A vehicle is considered to be in motion if it is traveling over 5 mph.
+                </p>
+              </div>
             </div>
           </div>
 
-          <!-- Other Section -->
           <div v-if="activeButton === 'faq'" :key="'faq'" class="w-full">
             <div class="w-full max-w-xl mx-auto mb-8 font">
               <h1
@@ -271,27 +284,27 @@ const items = [
   {
     label: "Where is ROUTE ELD's office located?",
     defaultOpen: true,
-    content: "1612 Prosser",
+    content: "1612 Prosser  Ave Ste 315, Dayton OH,45409-2041 USA",
   },
   {
-    label: "Installation",
+    label: "How can i get new device?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
+      "To get ELD hardware, please call us Sales Department at 321-999-7776 ext 101 oremail us at route.support.eld@gmail.com",
   },
   {
-    label: "Theming",
+    label: "What ELD hardware manufacturers are compatible with ROUTE ELD?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
+      "Bluelink,IOSIX, and Pacific Track(Android only) devices are compatible with our system. Please note that if you have an Indian device(VNA2), you will need to upgrade because the hardware has been discontinued. Contact us 321-999-7776 ext 101 or email us at route.suppport.eld@gmail.com to purchase a replacement.",
   },
   {
-    label: "Layouts",
+    label: "Does ROUTE ELD require a contract?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
+      "No ,we offer a month-to-month subscription that doesn't require a long-term commitment. There are also no fess or penalties if you cancel services at any time",
   },
   {
-    label: "Components",
+    label: "Which cellular network provider is preferable",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue.",
+      "Verizon (Unlimited) and T-Mobile (Unlimited)Does",
   },
 ];
 
