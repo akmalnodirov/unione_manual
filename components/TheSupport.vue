@@ -186,20 +186,25 @@
             <div class="max-w-3xl mx-auto p-6 mb-12">
               <UAccordion
                 :items="items"
-                :ui="{ wrapper: 'flex flex-col w-full' }"
+                :ui="{ wrapper: 'flex flex-col w-full',
+                  item: {
+                    base: 'bg-[#44444D] , m-0, px-3 py-1, border  border-gray-200'
+                  }
+                 }"
               >
                 <template #default="{ item, open }">
                   <UButton
                     variant="ghost"
-                    class="border my-2 bg-[#44444D] border-gray-200 dark:border-gray-700"
-                    :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
+                    class="border   bg-[#44444D] border-gray-200"
+                    style="border-bottom: none;"
+                    :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' }, }"
                   >
                     <span class="truncate text-white p-4">{{
                       item.label
                     }}</span>
                     <template #trailing>
                       <UIcon
-                        name="i-heroicons-chevron-right-20-solid"
+                        name="i-heroicons-plus"
                         class="w-5 h-5 ms-auto text-white transform transition-transform duration-200"
                         :class="[open && 'rotate-90']"
                       />
@@ -283,7 +288,6 @@ const videoCards = [
 const items = [
   {
     label: "Where is ROUTE ELD's office located?",
-    defaultOpen: true,
     content: "1612 Prosser  Ave Ste 315, Dayton OH,45409-2041 USA",
   },
   {
