@@ -9,15 +9,15 @@
         <h2 class="text-2xl mt-4">Eld Support Solution</h2>
       </div>
 
-      <div class="flex justify-center gap-3 mb-8">
+      <div class="flex justify-center gap-4 mb-8">
         <UButton
           v-for="button in buttons"
           :key="button.id"
+          :ui="{                   
+                    base: 'bg-[#44444D]'
+                 }"
           :class="[
             'transition-all duration-300 rounded-full',
-            activeButton === button.id
-              ? 'bg-[#44444D] text-white'
-              : 'bg-gray-600 text-white hover:bg-gray-700',
             'px-4 py-1 text-xs',
             'sm:px-6 sm:py-2 sm:text-sm',
             'md:px-8 md:py-2 md:text-base',
